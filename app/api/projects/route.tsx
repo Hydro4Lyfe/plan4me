@@ -10,8 +10,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
               ownerId: userId 
             }
         });
-
-        return NextResponse.json({ project: projects, message: "Retrieved Projects"}, {status: 201});
+        return NextResponse.json({ projects: projects, message: "Retrieved Projects"}, {status: 201});
     } catch (error) {
         return NextResponse.json({message: "Something failed"}, { status: 501 });
     }

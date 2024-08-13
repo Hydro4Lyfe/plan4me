@@ -2,26 +2,28 @@
 
 import api from "@/app/api/api";
 import Router from "next/router";
-import { useSearchParams } from "next/navigation";
-
-
-async function getProjects(id: string): Promise<any> {
-    const res:Promise<any> = await api('/api/projects/'+id).then((res) => {
-      return res.data.project
-    }).catch((err) => console.warn(err))
-    return res
-  }
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page()
 {
-    const searchParams = useSearchParams()
-
-    const search = searchParams.get('')
-    //const project = getProjects(id);
+    const path = usePathname()
+    const temp = path.substring(path.indexOf('/') + 1)
+    const id = temp.substring(temp.indexOf('/') + 1)
+    const [project, setProject] = useState([])
+  
+    useEffect(() => {
+      api('/api/projects/'+id).then((res) => {
+        setProject(res.data.project)
+      }).catch((err) => console.warn(err))
+      console.log(project)
+    }, [])
     
     return (
         <div>
-            Hello
+            <h1>
+              {project}
+            </h1>
         </div>    
     );
 }

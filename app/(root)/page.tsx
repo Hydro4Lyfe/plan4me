@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Card,
   CardContent,
@@ -5,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card"
+} from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -14,6 +16,7 @@ import { Console } from "console";
 import internal from "stream";
 import api from "../api/api";
 import { format } from "date-fns"
+import { useEffect, useState } from "react";
 
 interface Project {
   id: string,
@@ -26,16 +29,15 @@ interface Project {
   status: string
 }
 
- async function getProjects(): Promise<any> {
-  const res:Promise<any> = await api('/api/projects').then((res) => {
-    return res.data.project
-  }).catch((err) => console.warn(err))
-  return res
-}
-
-export default async function Home() {
-  const res = await getProjects()
-  const projects = res
+export default function Home() {
+  const [projects, setProjects ] = useState([])
+  
+  useEffect(() => {
+    api('/api/projects').then((res) => {
+      setProjects(res.data.projects);
+    }).catch((err) => console.warn(err))
+  }, [])
+  
   return (
       <div className="h-full w-full flex flex-col gap-4">
         <div className="flex flex-col gap-3">
