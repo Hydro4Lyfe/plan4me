@@ -1,8 +1,9 @@
+'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { date, nullable, z } from "zod"
+import { date, nullable, number, string, TypeOf, z, ZodAny } from "zod"
 import { zfd, } from 'zod-form-data'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
@@ -29,30 +30,35 @@ import { cn } from '@/lib/utils'
 import api from '@/app/api/api'
 import { redirect, useRouter } from 'next/navigation'
 import { Router } from 'next/router'
+import { SessionProvider, useSession } from 'next-auth/react'
 
 const formSchema = z.object({
-    ownerId: z.string(),
+    ownerId: z.string().optional(),
     name: z.string().min(1).max(50),
     description: z.string().min(0).max(250),
     endDate: z.date(),
   })
 
 const NewProject = () => {
-    
+    const id = useSession().data?.user.id
+    const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          ownerId: "clz6380vx0000hbh0oqdtozg2",
+          ownerId: id,
           name: "project-1",
           description: "description",
-          endDate: null,
+          endDate: new Date,
         },
       })
-    
+
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await api.post('/api/newproject', values).then(res => redirect('http://localhost:3000')).catch(err => console.warn(err))
-        redirect("http://localhost:/projects")
+        const res = await api.post('/api/newproject', values).catch(err => console.warn(err))
+        console.log("hello")
+        router.push('/')
       }
+
+
 
     return (
       <Form {...form}>
@@ -64,7 +70,7 @@ const NewProject = () => {
             <FormItem>
               <FormLabel>Project Name</FormLabel>
               <FormControl>
-                <Input className='w-[500px]' placeholder="shadcn" {...field} required/>
+                <Input className='w-[500px]' {...field} required/>
               </FormControl>
               <FormDescription>
                 This is your project name
@@ -81,7 +87,7 @@ const NewProject = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Description" {...field} className="w-[750px]" required/>
+                <Input {...field} className="w-[750px]" required/>
               </FormControl>
               <FormDescription>
                 This is your project description
@@ -141,11 +147,10 @@ const NewProject = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input className="hidden" placeholder="clz6380vx0000hbh0oqdtozg2" {...field} required/>
+                <Input {...field} required/>
               </FormControl>
               <FormMessage />
             </FormItem>
-            
           )}
         />
         <Button type="submit">Submit</Button>

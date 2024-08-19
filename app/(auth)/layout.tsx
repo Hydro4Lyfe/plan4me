@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -9,9 +10,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        {children}
+          {children}
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ export default function Navbar()
                     alt="User Profile Icon"
                     width="30"
                     height="30"
-                    className="rounded-full ml-3"
+                    className="rounded-full ml-3 h-[30px] w-[30px]"
                 />
                 <h1>{session.data?.user?.name}</h1>
             </div>

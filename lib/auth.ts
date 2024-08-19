@@ -1,6 +1,7 @@
 import type { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
+import nextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import { signIn } from "next-auth/react";
@@ -18,10 +19,26 @@ export const AuthOptions: NextAuthOptions = {
           clientSecret: process.env.GOOGLE_SECRET as string,
         }),
   ],
-  //adapter: PrismaAdapter(prisma) as Adapter,
-  secret: process.env.NEXTAUTH_SECRET,
+  adapter: PrismaAdapter(prisma) as Adapter,
   pages: {
     signIn: '/login',
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    session({ session, user }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+        },
+      };
+      // session.user.id = user.id;
+      // return session;
+    }
+  },
+  session: {
+    strategy: "database",
   }
 }
 

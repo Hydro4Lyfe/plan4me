@@ -1,11 +1,10 @@
 'use client'
 
-import React from 'react'
 import { SessionProvider } from 'next-auth/react'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 
-const Layout = () => {
+const NavLayout = () => {
   return (
     <SessionProvider >
       <Sidebar />
@@ -14,4 +13,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default NavLayout

@@ -16,11 +16,19 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
-import { signIn, useSession } from "next-auth/react"
-
+import { signIn, useSession} from "next-auth/react"
+import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { Replace } from "lucide-react"
 
 export function SignInForm() {
     const session = useSession();
+    const searchParams = useSearchParams()
+
+    const router = useRouter()
+    if (session){
+      router.push('/')
+    }
 
     return (
       <Card className="mx-auto max-w-sm">
@@ -53,10 +61,10 @@ export function SignInForm() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full" onClick={() => {signIn('google', { callbackUrl: `${window.location.origin}`} );}}>
+          <Button variant="outline" className="w-full" onClick={() => {signIn('google');}}>
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full"  onClick={() => {signIn('github', { callbackUrl: `${window.location.origin}`});}}>
+          <Button variant="outline" className="w-full"  onClick={() => {signIn('github');}}>
             Login with Github
           </Button>
         </div>

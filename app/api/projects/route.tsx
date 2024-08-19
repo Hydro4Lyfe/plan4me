@@ -1,8 +1,13 @@
+import { AuthOptions } from "@/lib/auth";
 import prisma from "@/lib/db";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
-    const userId = "clz6380vx0000hbh0oqdtozg2"
+    const session = await getServerSession(AuthOptions).then(res => {
+        return res?.user
+    })
+    const userId = session?.id
 
     try {
         const projects = await prisma.project.findMany({

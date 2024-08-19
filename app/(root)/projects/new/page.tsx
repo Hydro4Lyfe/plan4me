@@ -6,6 +6,8 @@ import { SessionProvider } from "next-auth/react";
 export default function Page()
 {
     return (
-        <NewProject />
+        <SessionProvider >
+            <NewProject />
+        </SessionProvider>
     );
 }

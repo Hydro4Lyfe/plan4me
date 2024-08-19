@@ -1,5 +1,11 @@
 import Link from "@/node_modules/next/link";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Projects from "@/components/Projects";
+import { SignInForm } from "@/components/SignInForm";
+import NewProject from "@/components/NewProject";
+import DatePicker from "@/components/DatePicker";
+import SignUpForm from "@/components/SignUpForm";
 
 export default function Page()
 {
@@ -13,8 +19,7 @@ export default function Page()
                     
                 </div>
                 <div className="flex flex-col ">
-                    <h1>Projects</h1>
-                    <textarea rows={10} cols={100}></textarea>
+                    <Projects />
                 </div>
                 <div>
                     
