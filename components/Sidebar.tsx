@@ -23,7 +23,14 @@ export default function Sidebar()
             <div className="w-full flex flex-col gap-2 text-foreground dark:text-foreground">
                 {links.map( (link: SidebarLink) => (
                     <Link href={link.route} key={link.id} className={pathname === `${link.route}` ? activeLink : inactiveLink}>
-                        <Image className="outline-white" src={dashboard} width={20} height={20} alt={`${link.label} icon`}/>
+                        {/* <Image 
+                        className="outline-white" 
+                        dangerouslySetInnerHTML={link.svg}
+                        src={dashboard} 
+                        width={20} 
+                        height={20} 
+                        alt={`${link.label} icon`}/> */}
+                        <div  dangerouslySetInnerHTML={{__html: link.svg}} />
                         {link.label}
                     </Link>
                 ))}
