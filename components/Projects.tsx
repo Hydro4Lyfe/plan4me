@@ -31,7 +31,7 @@ const Projects = () => {
         <div className="flex flex-col gap-3">
             <h1 className="text-2xl font-bold">Projects</h1>
             <Separator />
-            <div className="h-full w-full flex flex-row gap-3">
+            <div className="h-full w-full flex flex-row flex-wrap gap-3">
             { projects.map( (project: Project) => (
                 <Link href={`/projects/${project.id}`} key={project.id} className="w-[375px] h-[200px]">
                     <Card className="h-full flex flex-col justify-between">

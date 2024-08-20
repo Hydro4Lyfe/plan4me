@@ -1,7 +1,6 @@
-import { SessionProvider, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { userInfo } from "os";
 import { Button } from "./ui/button";
 
 export default function Navbar()
@@ -9,8 +8,8 @@ export default function Navbar()
     const session = useSession()
 
     return (
-        <nav className="bg-background dark:bg-background text-foreground dark:text-foreground min-h-16 w-full fixed top-0 flex flex-row items-center justify-between px-6 shadow-secondary shadow-sm">
-            <h1 className="text-3xl">
+        <nav className="bg-background dark:bg-background text-foreground dark:text-foreground min-h-16 w-full fixed top-0 flex flex-row items-center justify-between px-6">
+            <h1 className="text-5xl">
                 Plan<span className="text-primary">4</span>Me
             </h1>
             <div className="flex flex-row-reverse items-center">

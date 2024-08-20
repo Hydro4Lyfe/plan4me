@@ -14,7 +14,7 @@ export default async function RootLayout({
   return (
     <main>
         <NavLayout />
-        <section className="bg-background text-foreground dark:bg-background dark:text-foreground text-black h-full w-full pt-[4.5rem] pl-52 pr-4">
+        <section className="bg-background text-foreground dark:bg-background dark:text-foreground text-black h-full w-full pt-[4.5rem] pl-56 pr-4">
               {children}
         </section>
     </main>

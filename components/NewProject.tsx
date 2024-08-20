@@ -33,7 +33,6 @@ import { Router } from 'next/router'
 import { SessionProvider, useSession } from 'next-auth/react'
 
 const formSchema = z.object({
-    ownerId: z.string().optional(),
     name: z.string().min(1).max(50),
     description: z.string().min(0).max(250),
     endDate: z.date(),
@@ -45,7 +44,6 @@ const NewProject = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          ownerId: id,
           name: "project-1",
           description: "description",
           endDate: new Date,
@@ -53,9 +51,9 @@ const NewProject = () => {
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await api.post('/api/newproject', values).catch(err => console.warn(err))
+        const res = await api.post('/api/projects', values).catch(err => console.warn(err))
         console.log("hello")
-        router.push('/')
+        router.push('/projects')
       }
 
 
@@ -137,18 +135,6 @@ const NewProject = () => {
               <FormDescription>
                 Pick the date you plan to have this project finished by
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="ownerId"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input {...field} required/>
-              </FormControl>
               <FormMessage />
             </FormItem>
           )}

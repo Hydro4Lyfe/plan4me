@@ -1,13 +1,9 @@
 'use client'
 
 import api from "@/app/api/api";
-import Router from "next/router";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { Project } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import { AuthOptions } from "@/lib/auth";
+import EditProject from "@/components/EditProject";
 
 export default function Page()
 {
@@ -25,10 +21,7 @@ export default function Page()
     return (
         <div>
             <h1>
-              {/* {
-                project.map((project: Project) => (
-                  <h1>{project.name}</h1>
-              ))} */}
+              <EditProject />
             </h1>
         </div>    
     );
