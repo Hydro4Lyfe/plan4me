@@ -33,7 +33,7 @@ const Projects = () => {
             <Separator />
             <div className="h-full w-full flex flex-row flex-wrap gap-3">
             { projects.map( (project: Project) => (
-                <Link href={`/projects/${project.id}`} key={project.id} className="w-[375px] h-[200px]">
+                <Link href={`/projects/${project.id}`} key={project.id} className="w-[375px] h-[200px] hover:drop-shadow-lg">
                     <Card className="h-full flex flex-col justify-between">
                         <CardHeader>
                         <CardTitle >{project.name}</CardTitle>

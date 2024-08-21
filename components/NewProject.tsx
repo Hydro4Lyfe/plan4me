@@ -4,14 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { date, nullable, number, string, TypeOf, z, ZodAny } from "zod"
-import { zfd, } from 'zod-form-data'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
 
-import axios from 'axios'
-
-
-import DatePicker from "@/components/DatePicker"
 import { Calendar } from './ui/calendar'
 import { Button } from "@/components/ui/button"
 import {
@@ -25,16 +20,14 @@ import {
 } from "@/components/ui/form"
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover'
 import { Input } from "@/components/ui/input"
-import { getServerSession } from 'next-auth'
 import { cn } from '@/lib/utils'
 import api from '@/app/api/api'
-import { redirect, useRouter } from 'next/navigation'
-import { Router } from 'next/router'
-import { SessionProvider, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const formSchema = z.object({
     name: z.string().min(1).max(50),
-    description: z.string().min(0).max(250),
+    description: z.string().max(250),
     endDate: z.date(),
   })
 
@@ -44,7 +37,7 @@ const NewProject = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          name: "project-1",
+          name: "My Project",
           description: "description",
           endDate: new Date,
         },
@@ -52,7 +45,6 @@ const NewProject = () => {
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
         const res = await api.post('/api/projects', values).catch(err => console.warn(err))
-        console.log("hello")
         router.push('/projects')
       }
 

@@ -36,7 +36,7 @@ model Project {
   endDate DateTime
   description String
   priority Int? @default(1)
-  status String?
+  status String? @default("in progress...")
   owner User @relation(fields: [ownerId], references: [id])
 }
 
