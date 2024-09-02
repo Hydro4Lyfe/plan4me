@@ -13,6 +13,6 @@ export interface Project {
     startDate: string,
     endDate: string,
     description: string,
-    priority: number, 
+    priority: string, 
     status: string
 }

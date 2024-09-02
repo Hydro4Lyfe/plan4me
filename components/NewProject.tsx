@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { date, nullable, number, string, TypeOf, z, ZodAny } from "zod"
@@ -23,7 +23,6 @@ import { Input } from "@/components/ui/input"
 import { cn } from '@/lib/utils'
 import api from '@/app/api/api'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 
 const formSchema = z.object({
     name: z.string().min(1).max(50),
@@ -32,7 +31,6 @@ const formSchema = z.object({
   })
 
 const NewProject = () => {
-    const id = useSession().data?.user.id
     const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -44,23 +42,24 @@ const NewProject = () => {
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await api.post('/api/projects', values).catch(err => console.warn(err))
-        router.push('/projects')
+        const res = await api.post('/api/projects', values).then( (res) => {
+          return res.data
+        })
+        const id = res.project.id
+        router.push('/projects/'+id)
       }
-
-
 
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Project Name</FormLabel>
+              <FormLabel className='text-md'>Project Name</FormLabel>
               <FormControl>
-                <Input className='w-[500px]' {...field} required/>
+                <Input className='w-full' {...field} required/>
               </FormControl>
               <FormDescription>
                 This is your project name
@@ -77,7 +76,7 @@ const NewProject = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} className="w-[750px]" required/>
+                <Input {...field} className="w-full" required/>
               </FormControl>
               <FormDescription>
                 This is your project description
@@ -92,10 +91,10 @@ const NewProject = () => {
           name="endDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Project Completetion Date</FormLabel>
+              <FormLabel className='mr-2'>Project Completetion Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
-                  <FormControl>
+                  <FormControl className="ml-2" >
                     <Button
                       variant={"outline"}
                       className={cn(
@@ -131,7 +130,7 @@ const NewProject = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className='text-right' type="submit">Submit</Button>
       </form>
       </Form>
   )

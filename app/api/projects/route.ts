@@ -2,6 +2,7 @@ import { AuthOptions } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import cuid from 'cuid'
 
 export async function GET(req: NextRequest, res: NextResponse) {
     const session = await getServerSession(AuthOptions)
@@ -24,9 +25,11 @@ export async function POST(req: NextRequest) {
         const [body, session] = await Promise.all([req.json(), getServerSession(AuthOptions)])
         const { name, description, endDate } = body;
         const ownerId = session?.user.id || ""
+        const id = cuid()
 
         const newProject = await prisma.project.create({
             data: {
+              id: id,
               ownerId,
               name,
               description,
