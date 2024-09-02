@@ -31,25 +31,28 @@ model User {
 model Project {
   id String @id @default(cuid())
   ownerId String
+  tasks Task[]
   name String
   startDate DateTime @default(now())
   endDate DateTime
   description String
   priority Int? @default(1)
-  status String? @default("in progress...")
+  status String @default("In Progress...")
   owner User @relation(fields: [ownerId], references: [id])
 }
 
 model Task {
   id String @id @default(cuid())
   ownerId String
+  projectId String
   name String
-  startDate DateTime
+  startDate DateTime @default(now())
   endDate DateTime
   description String
   priority Int @default(1)
   status String
   owner User @relation(fields: [ownerId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
 }
  
 model Account {
