@@ -9,7 +9,7 @@ export default function DeleteProject() {
 
     async function DeleteProject() {
         await api.delete(`/api/projects/${id}`)
-        router.push('/projects')
+        router.replace('/projects')
     }
 
     return (

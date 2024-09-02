@@ -31,7 +31,7 @@ const formSchema = z.object({
     endDate: z.date(),
   })
 
-const NewProject = () => {
+export default function NewTask() {
     const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
@@ -131,5 +131,3 @@ const NewProject = () => {
       </Form>
   )
 }
-
-export default NewProject
