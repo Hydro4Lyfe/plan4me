@@ -3,7 +3,6 @@
 import Image from "next/image"
 import { Provider, useState } from "react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -23,7 +22,6 @@ import { Replace } from "lucide-react"
 
 export function SignInForm() {
     const session = useSession();
-    const searchParams = useSearchParams()
 
     const router = useRouter()
     if (session){
