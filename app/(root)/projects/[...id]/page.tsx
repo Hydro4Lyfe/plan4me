@@ -22,7 +22,7 @@ export default function Page()
       api('/api/projects/'+id).then((res) => {
         setProject(res.data.project)
       }).catch((err) => console.warn(err))
-    }, [])
+    }, [id])
 
     return (
         <div className="flex flex-col justify-between items-start">
