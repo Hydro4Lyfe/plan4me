@@ -11,10 +11,12 @@ import prisma from "./db";
 export const AuthOptions: NextAuthOptions = {    
   providers: [
         GithubProvider({
+          id: "Github Login",
           clientId: process.env.GITHUB_ID as string,
           clientSecret: process.env.GITHUB_SECRET as string,
         }),
         GoogleProvider({
+          id: "Google Login",
           clientId: process.env.GOOGLE_ID as string,
           clientSecret: process.env.GOOGLE_SECRET as string,
         }),
