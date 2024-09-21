@@ -56,29 +56,10 @@ export function SignInForm() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full" onClick={async () => {
-              try {
-                await signIn('google');
-              }
-              catch {
-                console.log("failed")
-              }
-              finally {
-                router.push('/')
-              }}}>
+          <Button variant="outline" className="w-full" onClick={ (e) => {signIn('google', { callbackUrl: '/'})}}>
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full"  onClick={async () => {
-              try {
-                await signIn('github');
-              }
-              catch {
-                console.log("failed")
-              }
-              finally {
-                router.push('/')
-              }
-            }}>
+          <Button variant="outline" className="w-full"  onClick={(e) => {signIn('github', { callbackUrl: '/'})}}>
             Login with Github
           </Button>
         </div>
