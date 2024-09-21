@@ -56,10 +56,14 @@ export function SignInForm() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full" onClick={ (e) => {signIn('google', { callbackUrl: '/'})}}>
+          <Button variant="outline" className="w-full" onClick={ (e) => {
+            e.preventDefault();
+            signIn('google', { callbackUrl: '/'})}}>
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full"  onClick={(e) => {signIn('github', { callbackUrl: '/'})}}>
+          <Button variant="outline" className="w-full"  onClick={(e) => {
+            e.preventDefault();
+            signIn('github', { callbackUrl: '/'})}}>
             Login with Github
           </Button>
         </div>
