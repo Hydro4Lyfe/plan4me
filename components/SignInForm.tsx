@@ -56,8 +56,7 @@ export function SignInForm() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full" onClick={async (e) => {
-              e.preventDefault()
+          <Button variant="outline" className="w-full" onClick={async () => {
               try {
                 await signIn('google');
               }
@@ -69,8 +68,7 @@ export function SignInForm() {
               }}}>
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full"  onClick={async (e) => {
-              e.preventDefault()
+          <Button variant="outline" className="w-full"  onClick={async () => {
               try {
                 await signIn('github');
               }
