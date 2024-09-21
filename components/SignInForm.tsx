@@ -24,9 +24,6 @@ export function SignInForm() {
     const session = useSession();
 
     const router = useRouter()
-    if (session){
-      router.push('/')
-    }
 
     return (
       <Card className="mx-auto max-w-sm">
@@ -59,10 +56,29 @@ export function SignInForm() {
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full" onClick={() => {signIn('google');}}>
+          <Button variant="outline" className="w-full" onClick={async () => {
+              try {
+                await signIn('google');
+              }
+              catch {
+                console.log("failed")
+              }
+              finally {
+                router.push('/')
+              }}}>
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full"  onClick={() => {signIn('github');}}>
+          <Button variant="outline" className="w-full"  onClick={async () => {
+              try {
+                await signIn('github');
+              }
+              catch {
+                console.log("failed")
+              }
+              finally {
+                router.push('/')
+              }
+            }}>
             Login with Github
           </Button>
         </div>
