@@ -34,7 +34,10 @@ const formSchema = z.object({
 const NewProject = () => {
     const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          endDate: new Date,
+        }
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -82,12 +85,12 @@ const NewProject = () => {
             
           )}
         />
-        <FormField
+         <FormField
           control={form.control}
           name="endDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-md'>Project Completetion Date</FormLabel>
+              <FormLabel>Project Completetion Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -115,7 +118,6 @@ const NewProject = () => {
                     disabled={(date) =>
                       date < new Date() || date < new Date("1900-01-01")
                     }
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
