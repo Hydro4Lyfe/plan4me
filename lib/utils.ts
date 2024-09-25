@@ -16,3 +16,15 @@ export interface Project {
     priority: string, 
     status: string
 }
+
+export interface Task {
+    id: string,
+    ownerId: string,
+    projectOwner: string,
+    name: string,
+    startDate: string,
+    endDate: string,
+    description: string,
+    priority: string, 
+    status: string
+}

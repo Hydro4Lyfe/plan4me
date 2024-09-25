@@ -2,9 +2,9 @@
 import React from 'react'
 
 import useSWR from 'swr'
-import api from '@/app/api/api'
-import { Project } from '@/lib/utils'
 import { format } from 'date-fns'
+import api from '@/app/api/api'
+import { Task } from '@/lib/utils'
 
 import {
     Card,
@@ -17,43 +17,38 @@ import {
 import { Separator } from './ui/separator'
 import Link from 'next/link'
 
-const fetcher = () => api.get('/api/projects').then((res) => res.data)
+const fetcher = () => api.get('/api/tasks').then((res) => res.data)
 
-const Projects = () => {
-    const { data, error } = useSWR('/api/projects', fetcher)
+const Tasks = () => {
+    const { data } = useSWR('/api/tasks', fetcher)
 
-    // if (error) return(
-    //     <div className='flex flex-col justify-center items-center'>
-    //         Failed to load
-    //     </div>
-    // ) 
     if (!data) return(
         <div className='flex flex-col justify-center items-center'>
             Loading...
         </div>
     ) 
     
-    const projects = data.projects
+    const tasks = data.tasks
 
     return (
         <div className="flex flex-col gap-3">
             <div className="h-full w-full flex flex-row flex-wrap gap-3">
-            { projects?.map( (project: Project) => (
-                <Link href={`/projects/${project.id}`} key={project.id} className="w-[375px] h-[250px] hover:drop-shadow-lg">
+            { tasks?.map( (task: Task) => (
+                <Link href={`/projects/${task.id}`} key={task.id} className="w-[375px] h-[250px] hover:drop-shadow-lg">
                     <Card className="h-full flex flex-col justify-between max-h-full">
                         <CardHeader>
-                        <CardTitle >{project.name}</CardTitle>
-                        <CardDescription className='overflow-hidden text-ellipsis max-h-18 min-h-0'>{project.description}</CardDescription>
+                        <CardTitle >{task.name}</CardTitle>
+                        <CardDescription className='overflow-hidden text-ellipsis max-h-16 min-h-0'>{task.description}</CardDescription>
                         </CardHeader>
                         <CardContent className="">
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-col items-left justify-content">
                                 <p className="text-lg" >Project Started</p>
-                                <p className="text-sm text-primary dark:text-primary" >{format(project.startDate, "PPP")}</p>
+                                <p className="text-sm text-primary dark:text-primary" >{format(task.startDate, "PPP")}</p>
                             </div>
                             <div className="flex flex-col items-left justify-content">
                                 <p className="text-lg">Project End</p>
-                                <p className="text-sm text-primary dark:text-primary">{format(project.endDate, "PPP")}</p>
+                                <p className="text-sm text-primary dark:text-primary">{format(task.endDate, "PPP")}</p>
                             </div>
                         </div>
                         </CardContent>
@@ -65,4 +60,4 @@ const Projects = () => {
     )
 }
 
-export default Projects
+export default Tasks

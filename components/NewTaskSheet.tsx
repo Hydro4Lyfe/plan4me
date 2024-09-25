@@ -19,11 +19,11 @@ export default function NewTaskSheet() {
             <SheetTrigger asChild>
                 <Button variant="outline">New Task</Button>
             </SheetTrigger>
-            <SheetContent style={{maxWidth: '28vw'}} side="left">
+            <SheetContent style={{maxWidth: '24vw'}} side="left">
                 <SheetHeader className="pb-4">
-                    <SheetTitle className="text-3xl text-primary">Create a Task</SheetTitle>
+                    <SheetTitle className="text-3xl font-bold text-primary">Create a Task</SheetTitle>
                     <SheetDescription>
-                        Tasks are easy to complete and make up the whole of the project.
+                        Tasks make up projects or they can be small goals
                     </SheetDescription>
                 </SheetHeader>
                 <NewTask />

@@ -38,11 +38,9 @@ export default function NewTask() {
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await api.post('/api/projects', values).then( (res) => {
+        const res = await api.post('/api/tasks', values).then( (res) => {
           return res.data
         })
-        const id = res.project.id
-        router.push('/projects/'+id)
       }
 
     return (
@@ -53,12 +51,12 @@ export default function NewTask() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-md'>Project Name</FormLabel>
+              <FormLabel className='text-md'>Task Name</FormLabel>
               <FormControl>
-                <Input {...field} className='w-full' placeholder='Project Name' required/>
+                <Input {...field} className='w-full' placeholder='Task Name' required/>
               </FormControl>
               <FormDescription>
-                This is your project name
+                This is your task name
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -75,7 +73,7 @@ export default function NewTask() {
                 <Textarea {...field} placeholder="Description" className="w-full resize-none" required />
               </FormControl>
               <FormDescription>
-                This is your project description
+                This is your task description
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -87,7 +85,7 @@ export default function NewTask() {
           name="endDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-md'>Project Completetion Date</FormLabel>
+              <FormLabel>Project Completetion Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -115,7 +113,6 @@ export default function NewTask() {
                     disabled={(date) =>
                       date < new Date() || date < new Date("1900-01-01")
                     }
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>

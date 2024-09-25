@@ -9,7 +9,7 @@ export default function Navbar()
 
     return (
         <nav className="bg-background dark:bg-background text-foreground dark:text-foreground min-h-16 w-full fixed top-0 flex flex-row items-center justify-between px-6">
-            <h1 className="text-5xl">
+            <h1 className="text-5xl pointer-events-none">
                 Plan<span className="text-primary">4</span>Me
             </h1>
             <div className="flex flex-row-reverse items-center">

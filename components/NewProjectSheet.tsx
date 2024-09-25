@@ -21,9 +21,9 @@ export default function NewProjectSheet() {
             <SheetTrigger asChild>
                 <Button variant="outline">New Project</Button>
             </SheetTrigger>
-            <SheetContent style={{maxWidth: '28vw'}} side="left">
+            <SheetContent style={{maxWidth: '24vw'}} side="left">
                 <SheetHeader className="pb-4">
-                    <SheetTitle className="text-3xl text-primary">Create Your Next Project</SheetTitle>
+                    <SheetTitle className="text-3xl font-bold text-primary">Create Your Next Project</SheetTitle>
                     <SheetDescription>
                         Create a project to begin tracking and adding tasks
                     </SheetDescription>

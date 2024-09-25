@@ -44,8 +44,8 @@ export const sidebarLinks = [
 
 export const DefaultProject = 
 {
-    id: "cm0ldp90e0004s3ihcp6n6ilm",
-    ownerId: "cm0ldoy0d0002s3ih3bgyeab7",
+    id: "0",
+    ownerId: "0",
     name: "Loading...",
     startDate: "2024-09-02T19:13:32.895Z",
     endDate: "2024-09-02T19:13:32.895Z",

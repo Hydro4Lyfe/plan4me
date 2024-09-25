@@ -16,6 +16,8 @@ import {
 import Projects from "@/components/Projects";
 import DatePicker from "@/components/DatePicker";
 import NewProject from "@/components/NewProject";
+import NewProjectSheet from "@/components/NewProjectSheet";
+import { Suspense } from "react";
 
 
 
@@ -25,21 +27,8 @@ export default function Page()
         <main>
             <div className="h-full w-full">
                 <div className="flex flex-row items-center justify-between px-4">
-                    <h1 className="text-3xl font-bold">Projects</h1>
-                    <Sheet>
-                        <SheetTrigger asChild>
-                            <Button variant="outline">New Project</Button>
-                        </SheetTrigger>
-                        <SheetContent style={{maxWidth: '24vw'}} side="left">
-                            <SheetHeader className="pb-4">
-                                <SheetTitle className="text-3xl font-bold text-primary">Create Your Next Project</SheetTitle>
-                                <SheetDescription>
-                                    Create a project to begin tracking and adding tasks
-                                </SheetDescription>
-                            </SheetHeader>
-                            <NewProject />
-                        </SheetContent>
-                    </Sheet>
+                    <h1 className="text-2xl font-bold">Projects</h1>
+                    <NewProjectSheet />
                 </div>
                 <Separator className="my-4"/>
                 <Projects />
