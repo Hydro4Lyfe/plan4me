@@ -8,8 +8,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const project = await prisma.project.findFirst({
             where: {
-              id: projectId 
-            }
+                id: projectId,
+            },
+            include: {
+              tasks: true, 
+            },
         });
 
         return NextResponse.json({ project: project, message: "Retrieved Project"}, {status: 201});

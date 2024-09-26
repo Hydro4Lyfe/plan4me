@@ -4,7 +4,7 @@ import React from 'react'
 import useSWR from 'swr'
 import { format } from 'date-fns'
 import api from '@/app/api/api'
-import { Task } from '@/lib/utils'
+import { TaskInterface } from '@/lib/utils'
 
 import {
     Card,
@@ -20,7 +20,11 @@ import Link from 'next/link'
 const fetcher = () => api.get('/api/tasks').then((res) => res.data)
 
 const Tasks = () => {
-    const { data } = useSWR('/api/tasks', fetcher)
+    const { data } = useSWR('/api/tasks', fetcher, {
+        revalidateOnMount: true,
+        revalidateIfStale: false,
+        revalidateOnFocus: true
+    })
 
     if (!data) return(
         <div className='flex flex-col justify-center items-center'>
@@ -33,8 +37,8 @@ const Tasks = () => {
     return (
         <div className="flex flex-col gap-3">
             <div className="h-full w-full flex flex-row flex-wrap gap-3">
-            { tasks?.map( (task: Task) => (
-                <Link href={`/projects/${task.id}`} key={task.id} className="w-[375px] h-[250px] hover:drop-shadow-lg">
+            { tasks?.map( (task: TaskInterface) => (
+                <Link href={`/tasks/${task.id}`} key={task.id} className="w-[375px] h-[250px] hover:drop-shadow-lg">
                     <Card className="h-full flex flex-col justify-between max-h-full">
                         <CardHeader>
                         <CardTitle >{task.name}</CardTitle>
@@ -51,6 +55,7 @@ const Tasks = () => {
                                 <p className="text-sm text-primary dark:text-primary">{format(task.endDate, "PPP")}</p>
                             </div>
                         </div>
+                        <p className='mt-2'>{task.status}</p>
                         </CardContent>
                     </Card>
                 </Link>

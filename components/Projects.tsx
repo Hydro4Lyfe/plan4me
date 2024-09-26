@@ -3,7 +3,7 @@ import React from 'react'
 
 import useSWR from 'swr'
 import api from '@/app/api/api'
-import { Project } from '@/lib/utils'
+import { ProjectInterface } from '@/lib/utils'
 import { format } from 'date-fns'
 
 import {
@@ -20,7 +20,11 @@ import Link from 'next/link'
 const fetcher = () => api.get('/api/projects').then((res) => res.data)
 
 const Projects = () => {
-    const { data, error } = useSWR('/api/projects', fetcher)
+    const { data, error } = useSWR('/api/projects', fetcher, {
+        revalidateOnMount: true,
+        revalidateIfStale: false,
+        revalidateOnFocus: true
+    })
 
     // if (error) return(
     //     <div className='flex flex-col justify-center items-center'>
@@ -35,14 +39,21 @@ const Projects = () => {
     
     const projects = data.projects
 
+    console.log(projects)
+
     return (
         <div className="flex flex-col gap-3">
             <div className="h-full w-full flex flex-row flex-wrap gap-3">
-            { projects?.map( (project: Project) => (
+            { projects?.map( (project: ProjectInterface) => (
                 <Link href={`/projects/${project.id}`} key={project.id} className="w-[375px] h-[250px] hover:drop-shadow-lg">
                     <Card className="h-full flex flex-col justify-between max-h-full">
                         <CardHeader>
-                        <CardTitle >{project.name}</CardTitle>
+                        <CardTitle >
+                            <div className='flex flex-row justify-between'>
+                                {project.name}
+                                <p className='text-sm text-primary'>{project.tasks.length}</p>
+                            </div>
+                        </CardTitle>
                         <CardDescription className='overflow-hidden text-ellipsis max-h-18 min-h-0'>{project.description}</CardDescription>
                         </CardHeader>
                         <CardContent className="">

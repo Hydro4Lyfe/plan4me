@@ -4,23 +4,36 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import cuid from 'cuid'
 
-export async function POST(req: NextRequest) {
-    try {
-        const [body, session] = await Promise.all([req.json(), getServerSession(AuthOptions)])
-        const { name, description, endDate } = body;
-        const ownerId = session?.user.id || ""
+export async function GET(req: NextRequest, res: NextResponse) {
+    const path = req.nextUrl.pathname
+    const ownerId = path.substring(path.lastIndexOf('/') + 1)
 
-        const newProject = await prisma.task.create({
-            data: {
-              ownerId: ownerId,
-              name,
-              description,
-              endDate,
+    try {
+        const task = await prisma.task.findFirst({
+            where: {
+              id: ownerId 
             }
         });
 
-        return NextResponse.json({ project: newProject, message: "Created new project"}, {status: 201});
+        return NextResponse.json({ task: task, message: "Retrieved Task"}, {status: 201});
     } catch (error) {
-        return NextResponse.json({message: "Something failed: in here", error: error}, { status: 501 });
+        return NextResponse.json({message: "Something failed"}, { status: 501 });
+    }
+}
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+    const path = req.nextUrl.pathname
+    const taskId = path.substring(path.lastIndexOf('/') + 1)
+
+    try {
+        const project = await prisma.task.delete({
+            where: {
+              id: taskId 
+            }
+        });
+
+        return NextResponse.json({ message: "Task Successfully Deleted" }, {status: 201});
+    } catch (error) {
+        return NextResponse.json({message: "Something failed", error: error }, { status: 501 });
     }
 }

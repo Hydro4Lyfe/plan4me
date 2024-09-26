@@ -1,7 +1,13 @@
+"use client"
+
 import React from 'react'
-import NewTask from './NewTask';
+import NewTask from './NewTask'
+import { NewTaskProps } from '@/lib/utils'
+import { useState } from 'react'
 
 import { Button } from './ui/button'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -13,20 +19,22 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-export default function NewTaskSheet() {
+export default function NewTaskSheet({ projectId, redirect }: NewTaskProps) {
+    const [status, setStatus] = useState(false)
+    
     return (
-        <Sheet>
+        <Sheet open={status} onOpenChange={(val) => setStatus(val)}>
             <SheetTrigger asChild>
                 <Button variant="outline">New Task</Button>
             </SheetTrigger>
             <SheetContent style={{maxWidth: '24vw'}} side="left">
                 <SheetHeader className="pb-4">
-                    <SheetTitle className="text-3xl font-bold text-primary">Create a Task</SheetTitle>
+                    <SheetTitle className="text-3xl font-bold text-primary">Create Your Next Task</SheetTitle>
                     <SheetDescription>
-                        Tasks make up projects or they can be small goals
+                        Tasks are small and easy to complete and make up projects
                     </SheetDescription>
                 </SheetHeader>
-                <NewTask />
+                <NewTask redirect={redirect} projectId={projectId}/>
             </SheetContent>
         </Sheet>
     ); 

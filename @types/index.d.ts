@@ -14,4 +14,17 @@ export type Project = {
     endDate: Date,
     status: String,
     priority: number,
+    tasks: Task[],
+}
+
+export type Task = {
+    id: string,
+    ownerId: string,
+    projectId: string,
+    name: string,
+    startDate: string,
+    endDate: string,
+    description: string,
+    priority: string, 
+    status: string
 }

@@ -25,7 +25,7 @@ export default function Page()
             <div className="h-full w-full">
                 <div className="flex flex-row items-center justify-between px-4">
                     <h1 className="text-2xl font-bold">Tasks</h1>
-                    <NewTaskSheet />
+                    <NewTaskSheet redirect={true} projectId=""/>
                 </div>
                 <Separator className="my-4"/>
                 <Tasks />

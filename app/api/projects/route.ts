@@ -12,6 +12,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const projects = await prisma.project.findMany({
             where: {
               ownerId: userId 
+            },
+            include:
+            {
+                tasks: true,
             }
         });
         return NextResponse.json({ projects: projects, message: "Retrieved Projects"}, {status: 201});

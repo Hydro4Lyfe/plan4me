@@ -24,23 +24,36 @@ import { Input } from "@/components/ui/input"
 import { cn } from '@/lib/utils'
 import api from '@/app/api/api'
 import { Textarea } from './ui/textarea'
+import { NewTaskProps } from '@/lib/utils'
+import { SheetClose } from './ui/sheet'
+
 
 const formSchema = z.object({
     name: z.string().min(1).max(75),
     description: z.string().max(500),
     endDate: z.date(),
+    projectId: z.string().optional()
   })
 
-export default function NewTask() {
+export default function NewTask({ projectId, redirect }: NewTaskProps) {
     const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          endDate: new Date,
+          projectId: projectId,
+        }
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
         const res = await api.post('/api/tasks', values).then( (res) => {
           return res.data
         })
+        const id = res.task.id
+        if (redirect){
+          router.push('/tasks/'+id)
+        }
+        router.back()
       }
 
     return (
@@ -85,7 +98,7 @@ export default function NewTask() {
           name="endDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Project Completetion Date</FormLabel>
+              <FormLabel>Task Completetion Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -117,12 +130,19 @@ export default function NewTask() {
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                Pick the date you plan to have this project finished by
+                Pick the date you plan to have this task finished by
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
+        <FormField
+            name='projectId'
+            control={form.control}
+            render={({ field }) => (
+              <input type='hidden' {...field} />
+            )}
+          />
         <Button className='space-y-4' type="submit">Submit</Button>
       </form>
       </Form>
