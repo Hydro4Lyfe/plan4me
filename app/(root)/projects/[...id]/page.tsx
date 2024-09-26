@@ -12,7 +12,6 @@ import { TaskInterface } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import NewTaskSheet from "@/components/NewTaskSheet";
-import ProjectTasks from "@/components/ProjectTasks";
 import Link from "next/link";
 
 import {
