@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react'
 import NewTask from './NewTask'
 import { NewTaskProps } from '@/lib/utils'
@@ -20,10 +18,8 @@ import {
 } from "@/components/ui/sheet"
 
 export default function NewTaskSheet({ projectId, redirect }: NewTaskProps) {
-    const [status, setStatus] = useState(false)
-    
     return (
-        <Sheet open={status} onOpenChange={(val) => setStatus(val)}>
+        <Sheet >
             <SheetTrigger asChild>
                 <Button variant="outline">New Task</Button>
             </SheetTrigger>

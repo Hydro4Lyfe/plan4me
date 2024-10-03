@@ -11,6 +11,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
         const tasks = await prisma.task.findMany({
             where: {
               ownerId: userId 
+            },
+            orderBy: {
+                endDate: 'asc'
             }
         });
         return NextResponse.json({ tasks: tasks, message: "Retrieved Tasks"}, {status: 201});

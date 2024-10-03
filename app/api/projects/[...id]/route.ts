@@ -11,7 +11,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
                 id: projectId,
             },
             include: {
-              tasks: true, 
+              tasks: {
+                orderBy: {
+                    endDate: 'asc'
+                }
+              } 
             },
         });
 

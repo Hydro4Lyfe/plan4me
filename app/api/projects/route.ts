@@ -16,6 +16,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
             include:
             {
                 tasks: true,
+            },
+            orderBy: {
+                endDate: 'asc'
             }
         });
         return NextResponse.json({ projects: projects, message: "Retrieved Projects"}, {status: 201});

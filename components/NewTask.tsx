@@ -50,10 +50,11 @@ export default function NewTask({ projectId, redirect }: NewTaskProps) {
           return res.data
         })
         const id = res.task.id
+        const projectId = res.task.projectId
         if (redirect){
           router.push('/tasks/'+id)
         }
-        router.back()
+        router.refresh()
       }
 
     return (
@@ -105,7 +106,7 @@ export default function NewTask({ projectId, redirect }: NewTaskProps) {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-[240px] pl-3 text-left font-normal box-content py-0.5",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -143,7 +144,10 @@ export default function NewTask({ projectId, redirect }: NewTaskProps) {
               <input type='hidden' {...field} />
             )}
           />
-        <Button className='space-y-4' type="submit">Submit</Button>
+        <SheetClose>
+          <Button className='space-y-4' type="submit">Submit</Button>
+        </SheetClose>
+        
       </form>
       </Form>
   )
