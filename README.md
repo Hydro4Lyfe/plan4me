@@ -1,36 +1,30 @@
-## Plan4Me
+# Plan4Me
+Plan4Me is a **simple** project planner using NextJS, PostgreSQL, and Prisma ORM.  The primary goal of this project is to develop a web application that serves as a project planner, enabling users to create, manage, and track their projects. Simultaneously, this project will provide a **hands-on opportunity** to learn and apply various modern web development technologies and frameworks.
 
-## Getting Started
+*This project not only aims to create a functional web application but also serves as a comprehensive learning experience, enhancing both **technical skills** and **project management capabilities**.
 
-First, run the development server:
+## Learning Opportunities
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   Gain hands-on experience with modern web development frameworks and libraries.
+-   Understand best practices for user authentication and data management.
+-   Develop skills in responsive design and user experience (UX) principles.
+-   Learn about deployment processes and version control with Git.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   **User Authentication:**
+    
+    -   Implement user registration and login functionalities.
+    -   Use OAuth for social media logins (Google, GitHub).
+-   **Project Creation and Management:**
+    
+    -   Allow users to create new projects with titles, descriptions, deadlines, and priorities.
+    -   Enable editing and deletion of projects.
+-   **Task Management:**
+    
+    -   Users can add tasks to each project, set due dates, and assign priority levels.
+    -   Implement task completion status (e.g., in progress, completed).
+-   **Progress Tracking:**
+    
+    -   Visual progress indicators for each project.
+    -   Optional Gantt charts or Kanban boards to display project timelines and task status.
