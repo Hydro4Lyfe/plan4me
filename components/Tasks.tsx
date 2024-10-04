@@ -17,7 +17,7 @@ import {
 import { Separator } from './ui/separator'
 import Link from 'next/link'
 
-const fetcher = () => api.get('/api/tasks').then((res) => res.data)
+const fetcher = (url: string) => api.get(url).then((res) => res.data)
 
 const Tasks = () => {
     const { data } = useSWR('/api/tasks', fetcher, {
